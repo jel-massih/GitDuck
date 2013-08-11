@@ -1,0 +1,69 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="GitDuck.RepoPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:phoneControls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="728" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="False">
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.Resources>
+            <DataTemplate x:Key="RepoListBoxItemTemplate">
+                <Grid Margin="0,12,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Image Width="35" Height="35" Source="{Binding RepoThumbnailSource}"/>
+                    <StackPanel Margin="12,-14,0,0" Grid.Column="1">
+                        <TextBlock FontSize="{StaticResource PhoneFontSizeLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Text="{Binding name}" TextWrapping="Wrap"/>
+                        <TextBlock FontSize="{StaticResource PhoneFontSizeNormal}" Text="{Binding full_name}" TextWrapping="Wrap" Foreground="{StaticResource PhoneAccentBrush}"/>
+                    </StackPanel>
+                </Grid>
+            </DataTemplate>
+            <DataTemplate x:Key="GistListBoxItemTemplate">
+                <Grid Margin="0,12,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Image Width="35" Height="35" Source="{Binding RepoThumbnailSource}"/>
+                    <StackPanel Margin="12,-14,0,0" Grid.Column="1">
+                        <TextBlock FontSize="{StaticResource PhoneFontSizeLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Text="{Binding fileData.filename}" TextWrapping="Wrap"/>
+                        <TextBlock FontSize="{StaticResource PhoneFontSizeNormal}" Text="{Binding user.login}" TextWrapping="Wrap" Foreground="{StaticResource PhoneSubtleBrush}"/>
+                    </StackPanel>
+                </Grid>
+            </DataTemplate>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1">
+            <phoneControls:Pivot x:Name="MainPivot" Margin="0,-12,0,0" Loaded="MainPivot_Loaded">
+                <phoneControls:PivotItem Header="Mine">
+                    <Grid>
+                        <telerikPrimitives:RadBusyIndicator x:Name="myRepoBusyIndicator" AnimationStyle="AnimationStyle7" Foreground="{StaticResource PhoneForegroundBrush}" Content="Getting Repositories..."/>
+                        <telerikPrimitives:RadDataBoundListBox x:Name="myRepoListBox" ItemTemplate="{StaticResource RepoListBoxItemTemplate}" Loaded="myRepoListBox_Loaded" EmptyContent="" Margin="-12,6,12,0"/>
+                    </Grid>
+                </phoneControls:PivotItem>
+                <phoneControls:PivotItem Header="Starred" x:Name="starPivotItem">
+                    <Grid>
+                        <telerikPrimitives:RadBusyIndicator x:Name="starBusyIndicator" AnimationStyle="AnimationStyle7" Foreground="{StaticResource PhoneForegroundBrush}" Content="Getting Repositories..."/>
+                        <telerikPrimitives:RadDataBoundListBox x:Name="starListBox" Margin="-12,6,12,0" ItemTemplate="{StaticResource RepoListBoxItemTemplate}" EmptyContent="" Loaded="starListBox_Loaded"/>
+                    </Grid>
+                </phoneControls:PivotItem>
+            </phoneControls:Pivot>
+        </Grid>
+    </Grid>
+</phone:PhoneApplicationPage>
