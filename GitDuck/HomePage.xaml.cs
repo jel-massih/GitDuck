@@ -157,25 +157,19 @@ namespace GitDuck
 
         private void starTile_Tap(object sender, GestureEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/RepoPage.xaml?page=starred", UriKind.Relative));
+            Dispatcher.BeginInvoke(() =>
+            {
+                NavigationService.Navigate(new Uri("/RepoPage.xaml?page=starred", UriKind.Relative));
+            });
         }
 
         private void issuesTile_Tap(object sender, GestureEventArgs e)
         {
-            System.Uri myUri = new System.Uri("https://api.github.com/user/issues");
-            HttpWebRequest myRequest = (HttpWebRequest)HttpWebRequest.Create(myUri);
-            myRequest.Headers["Authorization"] = "Token " + IsolatedStorageSettings.ApplicationSettings["oauthToken"];
-            System.Diagnostics.Debug.WriteLine(IsolatedStorageSettings.ApplicationSettings["oauthToken"]);
-            myRequest.BeginGetResponse(new AsyncCallback(GetIssuesCallback), myRequest);
+            Dispatcher.BeginInvoke(() =>
+            {
+                NavigationService.Navigate(new Uri("/IssuePage.xaml", UriKind.Relative));
+            });
         }
 
-        private void GetIssuesCallback(IAsyncResult ar)
-        {
-            HttpWebRequest request = (HttpWebRequest)ar.AsyncState;
-            HttpWebResponse response = (HttpWebResponse)request.EndGetResponse(ar);
-            StreamReader httpWebStreamReader = new StreamReader(response.GetResponseStream());
-            string result = httpWebStreamReader.ReadLine();
-            System.Diagnostics.Debug.WriteLine(result);
-        }
     }
 }

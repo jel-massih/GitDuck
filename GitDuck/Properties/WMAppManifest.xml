@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
-  <App xmlns="" ProductID="{81ad20af-bd7f-4b08-81b6-67c6fde99559}" Title="GitDuck" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="GitDuck author" Description="Sample description" Publisher="GitDuck">
+  <App xmlns="" ProductID="{a27cbe61-06fd-4e35-a6de-a9735aa3194f}" Title="GitDuck" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="GitDuck author" Description="Sample description" Publisher="GitDuck">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_GAMERSERVICES" />

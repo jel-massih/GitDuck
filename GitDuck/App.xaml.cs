@@ -26,7 +26,6 @@ namespace GitDuck
         /// Component used to raise a notification to the end users to rate the application on the marketplace.
         /// </summary>
         public RadRateApplicationReminder rateReminder;
-
         
 		/// <summary>
         /// Provides easy access to the root frame of the Phone Application.

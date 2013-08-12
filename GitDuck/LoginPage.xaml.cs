@@ -39,6 +39,7 @@ namespace GitDuck
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
+            linkBtn.IsEnabled = true;
             if (IsolatedStorageSettings.ApplicationSettings.Contains("oauthToken"))
             {
                 CheckAuthToken(IsolatedStorageSettings.ApplicationSettings["oauthToken"].ToString());
@@ -64,8 +65,14 @@ namespace GitDuck
 
         private void GetValidateAuthCallback(IAsyncResult ar)
         {
-            HttpWebRequest request = (HttpWebRequest)ar.AsyncState;
-            HttpWebResponse response = (HttpWebResponse)request.EndGetResponse(ar);
+            HttpWebResponse response = null;
+            try
+            {
+                HttpWebRequest request = (HttpWebRequest)ar.AsyncState;
+                response = (HttpWebResponse)request.EndGetResponse(ar);
+            }
+            catch (Exception ex)
+            { ResetLinkage(); return; }
             StreamReader httpWebStreamReader = new StreamReader(response.GetResponseStream());
             string result = httpWebStreamReader.ReadLine();
             result = result.Replace("{", "").Replace("}", "");
@@ -75,7 +82,10 @@ namespace GitDuck
             foreach (string str in entryArray)
             {
                 string delstr = str.Replace("\"","");
-                RawUserData.Add(delstr.Substring(0, delstr.IndexOf(':')), delstr.Substring(delstr.IndexOf(':') + 1));
+                try
+                {
+                    RawUserData.Add(delstr.Substring(0, delstr.IndexOf(':')), delstr.Substring(delstr.IndexOf(':') + 1));
+                } catch (Exception e){}
             }
             
             if (RawUserData.ContainsKey("login"))
@@ -97,8 +107,11 @@ namespace GitDuck
             IsolatedStorageSettings.ApplicationSettings.Remove("oauthToken");
             Dispatcher.BeginInvoke(() =>
             {
+                linkBtn.Visibility = System.Windows.Visibility.Visible;
+                resetBtn.Visibility = System.Windows.Visibility.Visible;
                 linkBtn.IsEnabled = true;
                 resetBtn.IsEnabled = false;
+                busyIndicator.IsRunning = false;
             });
         }
     }

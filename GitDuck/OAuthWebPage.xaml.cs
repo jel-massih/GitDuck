@@ -53,7 +53,7 @@ namespace GitDuck
             else if (bLoginCheck)
             {
                 bLoginCheck = false;
-                Uri oauthUri = new Uri("https://github.com/login/oauth/authorize?client_id=f58c3fa6caa3c8f9f8a2", UriKind.Absolute);
+                Uri oauthUri = new Uri("https://github.com/login/oauth/authorize?client_id=f58c3fa6caa3c8f9f8a2&scope=user,repo", UriKind.Absolute);
                 oauthBrowser.Navigate(oauthUri);
                 return;
             }

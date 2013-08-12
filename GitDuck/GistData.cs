@@ -15,7 +15,7 @@ namespace GitDuck
         public string updated_at { get; set; }
         public string description { get; set; }
         public int comments { get; set; }
-        public Owner user { get; set; }
+        public User user { get; set; }
         public string comments_url { get; set; }
         public object files { get; set; }
         public GistFileData fileData { get; set; }

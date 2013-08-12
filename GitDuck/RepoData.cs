@@ -11,7 +11,7 @@ namespace GitDuck
         public int id { get; set; }
         public string name { get; set; }
         public string full_name { get; set; }
-        public Owner owner { get; set; }
+        public User owner { get; set; }
         public bool @private { get; set; }
         public string html_url { get; set; }
         public string description { get; set; }
@@ -48,7 +48,7 @@ namespace GitDuck
     }
 
 
-    public class Owner : INotifyPropertyChanged
+    public class User : INotifyPropertyChanged
     {
         public string login { get; set; }
         public int id { get; set; }
