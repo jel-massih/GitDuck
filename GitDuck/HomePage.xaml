@@ -80,8 +80,8 @@
                     <ScrollViewer>
                         <Grid>
                             <Image x:Name="avatarImg" Margin="10,10,225,355"/>
-                            <TextBlock FontSize="30" HorizontalAlignment="Left" Margin="218,10,0,0" TextWrapping="Wrap" Text="{Binding RealName}" VerticalAlignment="Top" Height="96" Width="192"/>
-                            <TextBlock FontSize="20" HorizontalAlignment="Left" Margin="218,106,0,0" TextWrapping="Wrap" Text="{Binding CompanyName}" VerticalAlignment="Top" Height="89" Width="192" Foreground="{StaticResource PhoneSubtleBrush}"/>
+                            <TextBlock FontSize="30" HorizontalAlignment="Left" Margin="218,10,0,0" TextWrapping="Wrap" Text="{Binding name}" VerticalAlignment="Top" Height="96" Width="192"/>
+                            <TextBlock FontSize="20" HorizontalAlignment="Left" Margin="218,106,0,0" TextWrapping="Wrap" Text="{Binding company}" VerticalAlignment="Top" Height="89" Width="192" Foreground="{StaticResource PhoneSubtleBrush}"/>
                         </Grid>
                     </ScrollViewer>
                 </Grid>

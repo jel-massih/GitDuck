@@ -29,7 +29,7 @@ namespace GitDuck
             gistsListBox.ItemsSource = gistItems;
             WebClient client = new WebClient();
             client.DownloadStringCompleted += client_gistsDownloadStringCompleted;
-            client.DownloadStringAsync(new System.Uri("https://api.github.com/users/" + (App.Current as App).UserData.UserName + "/gists"));
+            client.DownloadStringAsync(new System.Uri("https://api.github.com/users/" + (App.Current as App).CurrentUserInfo.login + "/gists"));
         }
 
         private void client_gistsDownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)

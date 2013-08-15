@@ -28,7 +28,7 @@ namespace GitDuck
         {
             InitializeComponent();
 
-            accountItem.Header = (App.Current as App).UserData.UserName;
+            accountItem.Header = (App.Current as App).CurrentUserInfo.login;
         }
 
         private void signOutBtn_Click(object sender, EventArgs e)
@@ -47,12 +47,22 @@ namespace GitDuck
             userFeedListBox.ItemsSource = userFeedItems;
             WebClient client = new WebClient();
             client.DownloadStringCompleted += client_feedDownloadStringCompleted;
-            client.DownloadStringAsync(new System.Uri("https://github.com/"+(App.Current as App).UserData.UserName+".atom"));
+            client.DownloadStringAsync(new System.Uri("https://github.com/"+(App.Current as App).CurrentUserInfo.login+".atom"));
         }
 
         private void client_feedDownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
-            UpdateNewsFeedList(e.Result);
+            try
+            {
+                UpdateNewsFeedList(e.Result);
+            }
+            catch
+            {
+                Dispatcher.BeginInvoke(() =>
+                {
+                    MessageBox.Show("Conn Issue: " + e.Error);
+                });
+            }
         }
 
         private void UpdateNewsFeedList(String atomReader)
@@ -68,7 +78,7 @@ namespace GitDuck
 
                 foreach (SyndicationItem item in feed.Items)
                 {
-                    TextSyndicationContent content = new TextSyndicationContent(FormatTimeOffset(DateTimeOffset.Now - item.PublishDate));
+                    TextSyndicationContent content = new TextSyndicationContent(HelperClasses.HelperMethods.FormatTimeOffset(DateTimeOffset.Now - item.PublishDate));
                     item.Summary = content;
                     userFeedItems.Add(item);
                 }
@@ -78,63 +88,10 @@ namespace GitDuck
             userFeedBusyIndicator.IsRunning = false;
         }
 
-        private String FormatTimeOffset(TimeSpan timeOffset)
-        {
-            String time = "";
-
-            if (timeOffset.Days != 0)
-            {
-                if (timeOffset.Days > 368)
-                {
-                    if (timeOffset.Days / 368 > 1)
-                    {
-                        time = timeOffset.Days / 368 + " years ago";
-                    }
-                    else
-                    {
-                        time = timeOffset.Days / 368 + " year ago";
-                    }
-
-                }
-                else if (timeOffset.Days > 1)
-                {
-                    time = timeOffset.Days + " days ago";
-                }
-                else
-                {
-                    time = timeOffset.Days + " day ago";
-                }
-            }
-            else if (timeOffset.Hours != 0)
-            {
-                if (timeOffset.Hours > 1)
-                {
-                    time = timeOffset.Hours + " hours ago";
-                }
-                else
-                {
-                    time = timeOffset.Hours + " hour ago";
-                }
-            }
-            else if (timeOffset.Minutes != 0)
-            {
-                if (timeOffset.Minutes > 1)
-                {
-                    time = timeOffset.Minutes + " minutes ago";
-                }
-                else
-                {
-                    time = timeOffset.Minutes + " minute ago";
-                }
-            }
-
-            return time;
-        }
-
         private void accountItem_Loaded(object sender, RoutedEventArgs e)
         {
-            accountContentContainer.DataContext = (App.Current as App).UserData;
-            BitmapImage image = new BitmapImage(new Uri((App.Current as App).UserData.AvatarURL, UriKind.Absolute));
+            accountContentContainer.DataContext = (App.Current as App).CurrentUserInfo;
+            BitmapImage image = new BitmapImage(new Uri((App.Current as App).CurrentUserInfo.avatar_url, UriKind.Absolute));
             avatarImg.Source = null;
             avatarImg.Source = image;
         }
@@ -143,7 +100,7 @@ namespace GitDuck
         {
             Dispatcher.BeginInvoke(() =>
             {
-                NavigationService.Navigate(new Uri("/RepoPage.xaml?page=repos", UriKind.Relative));
+                NavigationService.Navigate(new Uri("/MainPages/RepoPage.xaml?page=repos", UriKind.Relative));
             });
         }
 
@@ -151,7 +108,7 @@ namespace GitDuck
         {
             Dispatcher.BeginInvoke(() =>
             {
-                NavigationService.Navigate(new Uri("/GistPage.xaml", UriKind.Relative));
+                NavigationService.Navigate(new Uri("/MainPages/GistPage.xaml", UriKind.Relative));
             });
         }
 
@@ -159,7 +116,11 @@ namespace GitDuck
         {
             Dispatcher.BeginInvoke(() =>
             {
+<<<<<<< HEAD
                 NavigationService.Navigate(new Uri("/RepoPage.xaml?page=starred", UriKind.Relative));
+=======
+                NavigationService.Navigate(new Uri("/MainPages/RepoPage.xaml?page=starred", UriKind.Relative));
+>>>>>>> Added RepoIssues Page
             });
         }
 
@@ -167,7 +128,11 @@ namespace GitDuck
         {
             Dispatcher.BeginInvoke(() =>
             {
+<<<<<<< HEAD
                 NavigationService.Navigate(new Uri("/IssuePage.xaml", UriKind.Relative));
+=======
+                NavigationService.Navigate(new Uri("/MainPages/IssuePage.xaml", UriKind.Relative));
+>>>>>>> Added RepoIssues Page
             });
         }
 

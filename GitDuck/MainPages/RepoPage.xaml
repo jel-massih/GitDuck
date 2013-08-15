@@ -54,13 +54,13 @@
                 <phoneControls:PivotItem Header="Mine">
                     <Grid>
                         <telerikPrimitives:RadBusyIndicator x:Name="myRepoBusyIndicator" AnimationStyle="AnimationStyle7" Foreground="{StaticResource PhoneForegroundBrush}" Content="Getting Repositories..."/>
-                        <telerikPrimitives:RadDataBoundListBox x:Name="myRepoListBox" ItemTemplate="{StaticResource RepoListBoxItemTemplate}" Loaded="myRepoListBox_Loaded" EmptyContent="" Margin="-12,6,12,0"/>
+                        <telerikPrimitives:RadDataBoundListBox x:Name="myRepoListBox" ItemTemplate="{StaticResource RepoListBoxItemTemplate}" Loaded="myRepoListBox_Loaded" EmptyContent="" Margin="-12,6,12,0" ItemTap="myRepoListBox_ItemTap"/>
                     </Grid>
                 </phoneControls:PivotItem>
                 <phoneControls:PivotItem Header="Starred" x:Name="starPivotItem">
                     <Grid>
                         <telerikPrimitives:RadBusyIndicator x:Name="starBusyIndicator" AnimationStyle="AnimationStyle7" Foreground="{StaticResource PhoneForegroundBrush}" Content="Getting Repositories..."/>
-                        <telerikPrimitives:RadDataBoundListBox x:Name="starListBox" Margin="-12,6,12,0" ItemTemplate="{StaticResource RepoListBoxItemTemplate}" EmptyContent="" Loaded="starListBox_Loaded"/>
+                        <telerikPrimitives:RadDataBoundListBox x:Name="starListBox" Margin="-12,6,12,0" ItemTemplate="{StaticResource RepoListBoxItemTemplate}" EmptyContent="" Loaded="starListBox_Loaded" ItemTap="myRepoListBox_ItemTap"/>
                     </Grid>
                 </phoneControls:PivotItem>
             </phoneControls:Pivot>

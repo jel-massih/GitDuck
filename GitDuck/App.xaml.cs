@@ -18,35 +18,20 @@ namespace GitDuck
 {
     public partial class App : Application
     {
-        /// <summary>
-        /// Component used to handle unhandle exceptions, to collect runtime info and to send email to developer.
-        /// </summary>
 		public RadDiagnostics diagnostics;
-        /// <summary>
-        /// Component used to raise a notification to the end users to rate the application on the marketplace.
-        /// </summary>
         public RadRateApplicationReminder rateReminder;
         
-		/// <summary>
-        /// Provides easy access to the root frame of the Phone Application.
-        /// </summary>
-        /// <returns>The root frame of the Phone Application.</returns>
         public PhoneApplicationFrame RootFrame { get; private set; }
 
-        public UserData UserData;
+        public User CurrentUserInfo;
+        public RepoData CurrentRepoInfo;
 
-        /// <summary>
-        /// Constructor for the Application object.
-        /// </summary>
         public App()
         {
-            // Global handler for uncaught exceptions. 
             UnhandledException += Application_UnhandledException;
 
-            // Standard Silverlight initialization
             InitializeComponent();
 
-            // Phone-specific initialization
             InitializePhoneApplication();
 
             // Show graphics profiling information while debugging.
@@ -73,7 +58,7 @@ namespace GitDuck
             diagnostics = new RadDiagnostics();
 
             //Defines the default email where the diagnostics info will be send.
-            diagnostics.EmailTo = "Me@MyCompany.com";
+            diagnostics.EmailTo = "jel-massih@hotmail.com";
 
             //Initializes this instance.
             diagnostics.Init();
@@ -82,7 +67,7 @@ namespace GitDuck
             rateReminder = new RadRateApplicationReminder();
 
             //Sets how often the rate reminder is displayed.
-            rateReminder.RecurrencePerUsageCount = 2;
+            rateReminder.RecurrencePerUsageCount = 5;
     
         }
 
@@ -139,33 +124,6 @@ namespace GitDuck
                 System.Diagnostics.Debugger.Break();
             }
         }
-
-        public void LoadUserData(Dictionary<String, String> RawUserData)
-        {
-
-            UserData = new UserData();
-
-            if (RawUserData.ContainsKey("login"))
-            {
-                UserData.UserName = RawUserData["login"];
-            }
-
-            if (RawUserData.ContainsKey("name"))
-            {
-                UserData.RealName = RawUserData["name"];
-            }
-
-            if (RawUserData.ContainsKey("avatar_url"))
-            {
-                UserData.AvatarURL = RawUserData["avatar_url"];
-            }
-
-            if (RawUserData.ContainsKey("company"))
-            {
-                UserData.CompanyName = RawUserData["company"];
-            }
-        }
-
 
         #region Phone application initialization
 

@@ -1,7 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
+<<<<<<< HEAD
   <App xmlns="" ProductID="{a27cbe61-06fd-4e35-a6de-a9735aa3194f}" Title="GitDuck" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="GitDuck author" Description="Sample description" Publisher="GitDuck">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
+=======
+  <App xmlns="" ProductID="{a27cbe61-06fd-4e35-a6de-a9735aa3194f}" Title="GitDuck" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="GitDuck author" Description="Github for Windows Phone" Publisher="GitDuck" BitsPerPixel="16">
+    <IconPath IsRelative="true" IsResource="false">Images\appIcon.png</IconPath>
+>>>>>>> Added RepoIssues Page
     <Capabilities>
       <Capability Name="ID_CAP_GAMERSERVICES" />
       <Capability Name="ID_CAP_IDENTITY_DEVICE" />
@@ -24,7 +29,7 @@
     <Tokens>
       <PrimaryToken TokenID="GitDuckToken" TaskName="_default">
         <TemplateType5>
-          <BackgroundImageURI IsRelative="true" IsResource="false">Background.png</BackgroundImageURI>
+          <BackgroundImageURI IsRelative="true" IsResource="false">Images\tileIcon.png</BackgroundImageURI>
           <Count>0</Count>
           <Title>GitDuck</Title>
         </TemplateType5>

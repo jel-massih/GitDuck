@@ -34,7 +34,7 @@ namespace GitDuck
             myRepoListBox.ItemsSource = myRepoItems;
             WebClient client = new WebClient();
             client.DownloadStringCompleted += client_myRepoDownloadStringCompleted;
-            client.DownloadStringAsync(new System.Uri("https://api.github.com/users/" + (App.Current as App).UserData.UserName + "/repos"));
+            client.DownloadStringAsync(new System.Uri("https://api.github.com/users/" + (App.Current as App).CurrentUserInfo.login + "/repos"));
         }
 
         private void client_myRepoDownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
@@ -63,7 +63,7 @@ namespace GitDuck
             starListBox.ItemsSource = starRepoItems;
             WebClient client = new WebClient();
             client.DownloadStringCompleted += client_starDownloadStringCompleted;
-            client.DownloadStringAsync(new System.Uri("https://api.github.com/users/" + (App.Current as App).UserData.UserName + "/starred"));
+            client.DownloadStringAsync(new System.Uri("https://api.github.com/users/" + (App.Current as App).CurrentUserInfo.login + "/starred"));
         }
 
         private void client_starDownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
@@ -94,6 +94,15 @@ namespace GitDuck
                     MainPivot.SelectedItem = starPivotItem;
                 }
             }
+        }
+
+        private void myRepoListBox_ItemTap(object sender, ListBoxItemTapEventArgs e)
+        {
+            (App.Current as App).CurrentRepoInfo = (RepoData)e.Item.AssociatedDataItem.Value;
+            Dispatcher.BeginInvoke(() =>
+            {
+                NavigationService.Navigate(new Uri("/InfoPages/RepoInfoPage.xaml", UriKind.Relative));
+            });
         }
     }
 }

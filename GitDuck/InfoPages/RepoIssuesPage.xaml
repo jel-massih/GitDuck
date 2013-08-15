@@ -1,0 +1,76 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="GitDuck.RepoIssuesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+    <phone:PhoneApplicationPage.Resources>
+        <DataTemplate x:Key="IssuesListBoxItemTemplate">
+            <Grid Margin="0,12,0,12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Margin="12,-14,0,0" Grid.Column="1">
+                    <TextBlock FontSize="{StaticResource PhoneFontSizeLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Text="{Binding title}" TextWrapping="Wrap"/>
+                    <TextBlock FontSize="{StaticResource PhoneFontSizeNormal}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Text="{Binding assignInfo}" TextWrapping="Wrap"/>
+                    <RichTextBox Padding="-12, 0, 0, 0" FontSize="{StaticResource PhoneFontSizeNormal}" FontFamily="{StaticResource PhoneFontFamilySemiLight}">
+                        <Paragraph Foreground="{StaticResource PhoneAccentBrush}" FontWeight="Bold">
+                            <Run Text="{Binding state}"/> -
+                            <Run Text="{Binding lastUpdateTime}"/> -
+                            <InlineUIContainer>
+                                <Image Height="24" VerticalAlignment="Center" Source="/Images/commit-icon.png" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" >
+                                    <Image.RenderTransform>
+                                        <CompositeTransform TranslateY="5"/>
+                                    </Image.RenderTransform>
+                                </Image>
+                            </InlineUIContainer>
+                            <Run Text="{Binding comments}"/>
+                        </Paragraph>
+                    </RichTextBox>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+    </phone:PhoneApplicationPage.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <telerikPrimitives:RadBusyIndicator x:Name="allIssuesBusyIndicator" AnimationStyle="AnimationStyle7" Foreground="{StaticResource PhoneForegroundBrush}" Content="Getting Issues..."/>
+        <controls:Pivot x:Name="issuesPivot" Title="Issues - Open" Loaded="issuesPivot_Loaded">
+            <controls:PivotItem Header="all">
+                <Grid>
+                    <telerikPrimitives:RadDataBoundListBox x:Name="allIssuesListBox" ItemTemplate="{StaticResource IssuesListBoxItemTemplate}" EmptyContent="" Margin="-12,6,12,0" Loaded="allIssuesListBox_Loaded" />
+                </Grid>
+            </controls:PivotItem>
+
+            <controls:PivotItem Header="bugs">
+                <Grid>
+                    <telerikPrimitives:RadDataBoundListBox x:Name="bugsIssuesListBox" ItemTemplate="{StaticResource IssuesListBoxItemTemplate}" EmptyContent="" Margin="-12,6,12,0" Loaded="bugsIssuesListBox_Loaded" />
+                </Grid>
+            </controls:PivotItem>
+
+            <controls:PivotItem Header="enhancements">
+                <Grid>
+                    <telerikPrimitives:RadDataBoundListBox x:Name="enhancementsIssuesListBox" ItemTemplate="{StaticResource IssuesListBoxItemTemplate}" EmptyContent="" Margin="-12,6,12,0" Loaded="enhancementsIssuesListBox_Loaded" />
+                </Grid>
+            </controls:PivotItem>
+
+            <controls:PivotItem Header="questions">
+                <Grid>
+                    <telerikPrimitives:RadDataBoundListBox x:Name="questionsIssuesListBox" ItemTemplate="{StaticResource IssuesListBoxItemTemplate}" EmptyContent="" Margin="-12,6,12,0" Loaded="questionsIssuesListBox_Loaded" />
+                </Grid>
+            </controls:PivotItem>
+        </controls:Pivot>
+    </Grid>
+
+</phone:PhoneApplicationPage>

@@ -13,6 +13,7 @@ using Microsoft.Phone.Controls;
 using System.IO.IsolatedStorage;
 using System.IO;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 
 namespace GitDuck
 {
@@ -22,8 +23,19 @@ namespace GitDuck
         {
             InitializeComponent();
             busyIndicator.IsRunning = true;
+            
             linkBtn.Visibility = System.Windows.Visibility.Collapsed;
             resetBtn.Visibility = System.Windows.Visibility.Collapsed;
+
+            if (NavigationContext == null || NavigationContext.QueryString == null || NavigationContext.QueryString.Count == 0)
+            {
+                (App.Current as App).rateReminder.Notify();
+            }
+
+            if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+            {
+                MessageBox.Show("No Network Connection Available! This App Requires an active network Connection!");
+            }
         }
 
         private void linkBtn_Click(object sender, RoutedEventArgs e)
@@ -75,9 +87,8 @@ namespace GitDuck
             { ResetLinkage(); return; }
             StreamReader httpWebStreamReader = new StreamReader(response.GetResponseStream());
             string result = httpWebStreamReader.ReadLine();
-            result = result.Replace("{", "").Replace("}", "");
-            string[] entryArray = Regex.Split(result, ",\"");
 
+<<<<<<< HEAD
             Dictionary<String, String> RawUserData = new Dictionary<string, string>();
             foreach (string str in entryArray)
             {
@@ -89,8 +100,12 @@ namespace GitDuck
             }
             
             if (RawUserData.ContainsKey("login"))
+=======
+            (App.Current as App).CurrentUserInfo = JsonConvert.DeserializeObject<User>(result);
+
+            if ((App.Current as App).CurrentUserInfo.login != null)
+>>>>>>> Added RepoIssues Page
             {
-                (App.Current as App).LoadUserData(RawUserData);
                 Dispatcher.BeginInvoke(() =>
                 {
                     NavigationService.Navigate(new Uri("/HomePage.xaml", UriKind.Relative));

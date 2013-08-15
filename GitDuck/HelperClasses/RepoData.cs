@@ -47,7 +47,10 @@ namespace GitDuck
         }
     }
 
+<<<<<<< HEAD:GitDuck/RepoData.cs
 
+=======
+>>>>>>> Added RepoIssues Page:GitDuck/HelperClasses/RepoData.cs
     public class User : INotifyPropertyChanged
     {
         public string login { get; set; }
@@ -55,17 +58,42 @@ namespace GitDuck
         public string avatar_url { get; set; }
         public string gravatar_id { get; set; }
         public string url { get; set; }
-        public string html_url { get; set; }
-        public string followers_url { get; set; }
-        public string following_url { get; set; }
-        public string gists_url { get; set; }
-        public string starred_url { get; set; }
-        public string subscriptions_url { get; set; }
-        public string organizations_url { get; set; }
-        public string repos_url { get; set; }
-        public string events_url { get; set; }
-        public string received_events_url { get; set; }
         public string type { get; set; }
+        public string name { get; set; }
+        public string company { get; set; }
+        public string blog { get; set; }
+        public string location { get; set; }
+        public string email { get; set; }
+        public bool hireable { get; set; }
+        public string bio { get; set; }
+        public int public_repos { get; set; }
+        public int followers { get; set; }
+        public int following { get; set; }
+        public string created_at { get; set; }
+        public string updated_at { get; set; }
+        public int public_gists { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged(String propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (null != handler)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+
+    public class RepoHubListItem : INotifyPropertyChanged
+    {
+        public RepoHubListItem(string itemName, string iconUrl)
+        {
+            this.itemName = itemName;
+            this.iconUrl = iconUrl;
+        }
+
+        public string itemName { get; set; }
+        public string iconUrl { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)
