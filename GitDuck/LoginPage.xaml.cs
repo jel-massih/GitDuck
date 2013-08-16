@@ -14,6 +14,7 @@ using System.IO.IsolatedStorage;
 using System.IO;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
+using GitDuck.HelperClasses;
 
 namespace GitDuck
 {
@@ -88,23 +89,9 @@ namespace GitDuck
             StreamReader httpWebStreamReader = new StreamReader(response.GetResponseStream());
             string result = httpWebStreamReader.ReadLine();
 
-<<<<<<< HEAD
-            Dictionary<String, String> RawUserData = new Dictionary<string, string>();
-            foreach (string str in entryArray)
-            {
-                string delstr = str.Replace("\"","");
-                try
-                {
-                    RawUserData.Add(delstr.Substring(0, delstr.IndexOf(':')), delstr.Substring(delstr.IndexOf(':') + 1));
-                } catch (Exception e){}
-            }
-            
-            if (RawUserData.ContainsKey("login"))
-=======
             (App.Current as App).CurrentUserInfo = JsonConvert.DeserializeObject<User>(result);
 
             if ((App.Current as App).CurrentUserInfo.login != null)
->>>>>>> Added RepoIssues Page
             {
                 Dispatcher.BeginInvoke(() =>
                 {

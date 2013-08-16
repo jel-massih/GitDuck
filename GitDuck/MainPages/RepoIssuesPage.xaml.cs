@@ -31,8 +31,12 @@ namespace GitDuck
         {
             issuesPivot.Title = (App.Current as App).CurrentRepoInfo.name + "/Issues - Open";
 
-            allIssuesBusyIndicator.IsRunning = true;
             allIssueItems = new ObservableCollection<IssueData>();
+            bugIssueItems = new ObservableCollection<IssueData>();
+            enhancementIssueItems = new ObservableCollection<IssueData>();
+            questionIssueItems = new ObservableCollection<IssueData>();
+
+            allIssuesBusyIndicator.IsRunning = true;
             WebClient client = new WebClient();
             client.DownloadStringCompleted += client_allIssuesDownloadStringCompleted;
             client.DownloadStringAsync(new System.Uri("https://api.github.com/repos/" + (App.Current as App).CurrentRepoInfo.full_name + "/issues"));
@@ -53,14 +57,10 @@ namespace GitDuck
                     issueData.assignInfo = "Unassigned";
                 }
                 //2013-08-14T18:47:51Z FORMAT
-                string timestamp = issueData.updated_at;
-                timestamp = timestamp.Replace("T", " ");
-                timestamp = timestamp.Replace("Z", "");
-                string pattern = "yyyy-MM-dd HH:mm:ss";
-                DateTime parsedDate;
-                if (DateTime.TryParseExact(timestamp, pattern, null, System.Globalization.DateTimeStyles.None, out parsedDate))
+                DateTime dateTime = HelperClasses.HelperMethods.GitHubDateToDateTime(issueData.updated_at);
+                if (dateTime != null)
                 {
-                    TimeSpan timeOffset = DateTimeOffset.Now - parsedDate;
+                    TimeSpan timeOffset = DateTimeOffset.Now - dateTime;
                     issueData.lastUpdateTime = HelperClasses.HelperMethods.FormatTimeOffset(timeOffset);
                 }
 
@@ -74,10 +74,6 @@ namespace GitDuck
 
         private void LoadLabelIssues()
         {
-            bugIssueItems = new ObservableCollection<IssueData>();
-            enhancementIssueItems = new ObservableCollection<IssueData>();
-            questionIssueItems = new ObservableCollection<IssueData>();
-
             foreach (IssueData issueData in allIssueItems)
             {
                 foreach (Label label in issueData.labels)
@@ -109,7 +105,7 @@ namespace GitDuck
 
         private void bugsIssuesListBox_Loaded(object sender, RoutedEventArgs e)
         {
-            bugsIssuesListBox.ItemsSource = allIssueItems;
+            bugsIssuesListBox.ItemsSource = bugIssueItems;
             if (bugIssueItems.Count < 1)
             {
                 bugsIssuesListBox.EmptyContent = "No Bug Issues Have Been Found!";

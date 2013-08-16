@@ -24,7 +24,6 @@ namespace GitDuck
         public RepoPage()
         {
             InitializeComponent();
-            
         }
 
         private void myRepoListBox_Loaded(object sender, RoutedEventArgs e)

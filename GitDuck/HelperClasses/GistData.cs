@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel;
+using GitDuck.HelperClasses;
 
 namespace GitDuck
 {
@@ -15,7 +16,7 @@ namespace GitDuck
         public string updated_at { get; set; }
         public string description { get; set; }
         public int comments { get; set; }
-        public User user { get; set; }
+        public BasicUser user { get; set; }
         public string comments_url { get; set; }
         public object files { get; set; }
         public GistFileData fileData { get; set; }

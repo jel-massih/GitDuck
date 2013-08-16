@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GitDuck.HelperClasses;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -12,10 +13,10 @@ namespace GitDuck
         public int id { get; set; }
         public int number { get; set; }
         public string title { get; set; }
-        public User user { get; set; }
+        public BasicUser user { get; set; }
         public List<Label> labels { get; set; }
         public string state { get; set; }
-        public User assignee { get; set; }
+        public BasicUser assignee { get; set; }
         public object milestone { get; set; }
         public int comments { get; set; }
         public string created_at { get; set; }

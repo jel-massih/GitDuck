@@ -56,12 +56,14 @@ namespace GitDuck
                     OpenRepoIssuePage();
                     break;
                 case "Commits":
+                    OpenRepoCommitPage();
                     break;
                 case "Source":
                     break;
                 case "Wiki":
                     break;
                 case "Followers":
+                    OpenRepoFollowerPage();
                     break;
             }
         }
@@ -70,7 +72,23 @@ namespace GitDuck
         {
             Dispatcher.BeginInvoke(() =>
             {
-                NavigationService.Navigate(new Uri("/InfoPages/RepoIssuesPage.xaml", UriKind.Relative));
+                NavigationService.Navigate(new Uri("/MainPages/RepoIssuesPage.xaml", UriKind.Relative));
+            });
+        }
+
+        private void OpenRepoCommitPage()
+        {
+            Dispatcher.BeginInvoke(() =>
+            {
+                NavigationService.Navigate(new Uri("/MainPages/RepoCommitsPage.xaml", UriKind.Relative));
+            });
+        }
+
+        private void OpenRepoFollowerPage()
+        {
+            Dispatcher.BeginInvoke(() =>
+            {
+                NavigationService.Navigate(new Uri("/MainPages/RepoFollowersPage.xaml", UriKind.Relative));
             });
         }
     }

@@ -29,23 +29,27 @@
 
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <Grid.Resources>
-                <DataTemplate x:Key="GistListBoxItemTemplate">
-                    <Grid Margin="0,12,0,12">
+                <DataTemplate x:Key="CommitListBoxItemTemplate">
+                    <Grid Margin="0,5,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <Image Width="35" Height="35" Source="{Binding RepoThumbnailSource}"/>
+                        <Rectangle Margin="0,-5,0,0" Fill="{StaticResource PhoneAccentBrush}" Width="16" Height="105" VerticalAlignment="Top">
+                            <Rectangle.OpacityMask>
+                                <ImageBrush ImageSource="/Images/commitLines.png" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
                         <StackPanel Margin="12,-14,0,0" Grid.Column="1">
-                            <TextBlock FontSize="{StaticResource PhoneFontSizeLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Text="{Binding fileData.filename}" TextWrapping="Wrap"/>
-                            <TextBlock FontSize="{StaticResource PhoneFontSizeNormal}" Text="{Binding user.login}" TextWrapping="Wrap" Foreground="{StaticResource PhoneSubtleBrush}"/>
+                            <TextBlock FontSize="{StaticResource PhoneFontSizeLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Text="{Binding commit.message}" TextWrapping="NoWrap"/>
+                            <TextBlock FontSize="{StaticResource PhoneFontSizeNormal}" Text="{Binding commitDetail}" TextWrapping="NoWrap" Foreground="{StaticResource PhoneSubtleBrush}"/>
+                            <TextBlock FontSize="{StaticResource PhoneFontSizeNormal}" Text="{Binding publishDate}" TextWrapping="NoWrap" Foreground="{StaticResource PhoneSubtleBrush}"/>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
             </Grid.Resources>
-            <telerikPrimitives:RadBusyIndicator x:Name="gistsBusyIndicator" AnimationStyle="AnimationStyle7" Foreground="{StaticResource PhoneForegroundBrush}" Content="Getting Gists..."/>
-            <telerikPrimitives:RadDataBoundListBox x:Name="gistsListBox" Margin="-12,6,12,0" ItemTemplate="{StaticResource GistListBoxItemTemplate}" EmptyContent="" Loaded="gistsListBox_Loaded"/>
+            <telerikPrimitives:RadBusyIndicator x:Name="commitsBusyIndicator" AnimationStyle="AnimationStyle7" Foreground="{StaticResource PhoneForegroundBrush}" Content="Getting Commits..."/>
+            <telerikPrimitives:RadDataBoundListBox x:Name="commitsListBox" Margin="-12,6,12,0" ItemTemplate="{StaticResource CommitListBoxItemTemplate}" EmptyContent="" Loaded="commitsListBox_Loaded"/>
         </Grid>
     </Grid>
-
 </phone:PhoneApplicationPage>

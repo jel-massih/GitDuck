@@ -59,5 +59,35 @@ namespace GitDuck.HelperClasses
 
             return time;
         }
+
+        public static DateTime GitHubDateToDateTime(string timestamp)
+        {
+            timestamp = timestamp.Replace("T", " ");
+            timestamp = timestamp.Replace("Z", "");
+            string pattern = "yyyy-MM-dd HH:mm:ss";
+            DateTime parsedDate;
+            if (DateTime.TryParseExact(timestamp, pattern, null, System.Globalization.DateTimeStyles.None, out parsedDate))
+            {
+                return parsedDate;
+            }
+            else
+            {
+                return DateTime.Now;
+            }
+        }
+
+        public static String GetMonth(int index)
+        {
+            string[] monthArr = new string[12] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+            if (index >= 12)
+            {
+                index = 11;
+            }
+            else if (index < 0)
+            {
+                index = 0;
+            }
+            return monthArr[index];
+        }
     }
 }

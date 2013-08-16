@@ -28,7 +28,14 @@ namespace GitDuck
         {
             InitializeComponent();
 
-            accountItem.Header = (App.Current as App).CurrentUserInfo.login;
+            try
+            {
+                accountItem.Header = (App.Current as App).CurrentUserInfo.login;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Could Not Load Current User Info");
+            }
         }
 
         private void signOutBtn_Click(object sender, EventArgs e)
@@ -116,11 +123,7 @@ namespace GitDuck
         {
             Dispatcher.BeginInvoke(() =>
             {
-<<<<<<< HEAD
-                NavigationService.Navigate(new Uri("/RepoPage.xaml?page=starred", UriKind.Relative));
-=======
                 NavigationService.Navigate(new Uri("/MainPages/RepoPage.xaml?page=starred", UriKind.Relative));
->>>>>>> Added RepoIssues Page
             });
         }
 
@@ -128,11 +131,7 @@ namespace GitDuck
         {
             Dispatcher.BeginInvoke(() =>
             {
-<<<<<<< HEAD
-                NavigationService.Navigate(new Uri("/IssuePage.xaml", UriKind.Relative));
-=======
                 NavigationService.Navigate(new Uri("/MainPages/IssuePage.xaml", UriKind.Relative));
->>>>>>> Added RepoIssues Page
             });
         }
 
