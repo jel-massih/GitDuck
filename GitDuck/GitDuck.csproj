@@ -87,6 +87,9 @@
     <Compile Include="HelperClasses\GistData.cs" />
     <Compile Include="HelperClasses\HelperMethods.cs" />
     <Compile Include="HelperClasses\UserData.cs" />
+    <Compile Include="MainPages\RepoStargazerPage.xaml.cs">
+      <DependentUpon>RepoStargazerPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPages\GistPage.xaml.cs">
       <DependentUpon>GistPage.xaml</DependentUpon>
     </Compile>
@@ -146,10 +149,15 @@
     <Content Include="Images\GitHub-Logo-Dark.png" />
     <Content Include="Images\GitHub-Logo-Light.png" />
     <Content Include="Images\issue-icon.png" />
+    <Content Include="Images\star-icon.png" />
     <Content Include="Images\tileIcon.png" />
     <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="MainPages\RepoStargazerPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainPages\GistPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

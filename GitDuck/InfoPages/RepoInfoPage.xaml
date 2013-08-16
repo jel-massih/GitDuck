@@ -38,7 +38,6 @@
                     <telerikPrimitives:WrapVirtualizationStrategyDefinition Orientation="Horizontal"/>
                 </telerikPrimitives:RadDataBoundListBox.VirtualizationStrategyDefinition>
             </telerikPrimitives:RadDataBoundListBox>
-
         </Grid>
     </Grid>
 

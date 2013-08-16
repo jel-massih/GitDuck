@@ -46,6 +46,7 @@ namespace GitDuck
                 HubList.Add(new RepoHubListItem("Wiki", "/Images/book-icon.png"));
             }
             HubList.Add(new RepoHubListItem("Followers", "/Images/follower-icon.png"));
+            HubList.Add(new RepoHubListItem("Stargazers", "/Images/star-icon.png"));
         }
 
         private void repoTileList_ItemTap(object sender, Telerik.Windows.Controls.ListBoxItemTapEventArgs e)
@@ -64,6 +65,9 @@ namespace GitDuck
                     break;
                 case "Followers":
                     OpenRepoFollowerPage();
+                    break;
+                case "Stargazers":
+                    OpenRepoStargazerPage();
                     break;
             }
         }
@@ -89,6 +93,14 @@ namespace GitDuck
             Dispatcher.BeginInvoke(() =>
             {
                 NavigationService.Navigate(new Uri("/MainPages/RepoFollowersPage.xaml", UriKind.Relative));
+            });
+        }
+
+        private void OpenRepoStargazerPage()
+        {
+            Dispatcher.BeginInvoke(() =>
+            {
+                NavigationService.Navigate(new Uri("/MainPages/RepoStargazerPage.xaml", UriKind.Relative));
             });
         }
     }

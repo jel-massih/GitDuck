@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="GitDuck.MainPages.RepoFollowersPage"
+    x:Class="GitDuck.MainPages.RepoStargazerPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -23,12 +23,12 @@
 
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock  x:Name="RepoTitleTF" Text="GitHub" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="Followers" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock Text="Stargazers" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <Grid.Resources>
-                <DataTemplate x:Key="FollowerListBoxItemTemplate">
+                <DataTemplate x:Key="StargazeListBoxItemTemplate">
                     <Grid Margin="12,0,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -41,8 +41,8 @@
                     </Grid>
                 </DataTemplate>
             </Grid.Resources>
-            <telerikPrimitives:RadBusyIndicator x:Name="followersBusyIndicator" AnimationStyle="AnimationStyle7" Foreground="{StaticResource PhoneForegroundBrush}" Content="Getting Followers..."/>
-            <telerikPrimitives:RadDataBoundListBox x:Name="followersListBox" Margin="-12,6,12,0" ItemTemplate="{StaticResource FollowerListBoxItemTemplate}" EmptyContent="" Loaded="followersListBox_Loaded"/>
+            <telerikPrimitives:RadBusyIndicator x:Name="stargazersBusyIndicator" AnimationStyle="AnimationStyle7" Foreground="{StaticResource PhoneForegroundBrush}" Content="Getting Stargazers..."/>
+            <telerikPrimitives:RadDataBoundListBox x:Name="stargazersListBox" Margin="-12,6,12,0" ItemTemplate="{StaticResource StargazeListBoxItemTemplate}" EmptyContent="" Loaded="stargazersListBox_Loaded"/>
         </Grid>
     </Grid>
 </phone:PhoneApplicationPage>
