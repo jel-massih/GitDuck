@@ -28,11 +28,6 @@ namespace GitDuck
             linkBtn.Visibility = System.Windows.Visibility.Collapsed;
             resetBtn.Visibility = System.Windows.Visibility.Collapsed;
 
-            if (NavigationContext == null || NavigationContext.QueryString == null || NavigationContext.QueryString.Count == 0)
-            {
-                (App.Current as App).rateReminder.Notify();
-            }
-
             if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
             {
                 MessageBox.Show("No Network Connection Available! This App Requires an active network Connection!");

@@ -62,6 +62,7 @@ namespace GitDuck
                 case "Source":
                     break;
                 case "Wiki":
+                    OpenRepoWikiPage();
                     break;
                 case "Followers":
                     OpenRepoFollowerPage();
@@ -85,6 +86,14 @@ namespace GitDuck
             Dispatcher.BeginInvoke(() =>
             {
                 NavigationService.Navigate(new Uri("/MainPages/RepoCommitsPage.xaml", UriKind.Relative));
+            });
+        }
+
+        private void OpenRepoWikiPage()
+        {
+            Dispatcher.BeginInvoke(() =>
+            {
+                NavigationService.Navigate(new Uri("/InfoPages/RepoWikiPage.xaml", UriKind.Relative));
             });
         }
 

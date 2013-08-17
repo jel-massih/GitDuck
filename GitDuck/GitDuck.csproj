@@ -84,9 +84,13 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="HelperClasses\CommitData.cs" />
+    <Compile Include="HelperClasses\FileData.cs" />
     <Compile Include="HelperClasses\GistData.cs" />
     <Compile Include="HelperClasses\HelperMethods.cs" />
     <Compile Include="HelperClasses\UserData.cs" />
+    <Compile Include="InfoPages\RepoWikiPage.xaml.cs">
+      <DependentUpon>RepoWikiPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPages\RepoStargazerPage.xaml.cs">
       <DependentUpon>RepoStargazerPage.xaml</DependentUpon>
     </Compile>
@@ -154,6 +158,10 @@
     <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="InfoPages\RepoWikiPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPages\RepoStargazerPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

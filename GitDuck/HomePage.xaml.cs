@@ -28,11 +28,16 @@ namespace GitDuck
         {
             InitializeComponent();
 
+            if (NavigationContext == null || NavigationContext.QueryString == null || NavigationContext.QueryString.Count == 0)
+            {
+                (App.Current as App).rateReminder.Notify();
+            }
+
             try
             {
                 accountItem.Header = (App.Current as App).CurrentUserInfo.login;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Could Not Load Current User Info");
             }
